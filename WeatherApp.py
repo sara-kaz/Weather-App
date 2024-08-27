@@ -1,7 +1,7 @@
 import requests
 import json
 
-api_key = "a324848564b117b70fadd84deae50d18"
+api_key = "a324848564b117b70fadd84deae50d18" # Open Weather Map API Key
 units = "metric"  # or "imperial" for Fahrenheit
 base_url = "http://api.openweathermap.org/data/2.5/"
 
