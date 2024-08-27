@@ -80,5 +80,11 @@ def main():
             print("Invalid choice, please try again.")
         print("Invalid choice")
 
+        # Ask the user if they want to go back to the menu
+        go_back = input("\nDo you want to go back to the menu? (yes/no): ").strip().lower()
+        if go_back != "yes":
+            print("Goodbye!")
+            break
+
 if __name__ == "__main__":
     main()
