@@ -51,27 +51,33 @@ def show_info():
     print("For more information about the PM Accelerator, visit our website or contact support.\n")
 
 def main():
-    print("Weather App")
-    print("Developed by Sara Ali")
-    print("1. Get current weather by city")
-    print("2. Get current weather by location")
-    print("3. Get 5-day forecast by city")
-    print("4. Info")
-    choice = int(input("Enter your choice: "))
+    while True:
+        print("\nWeather App")
+        print("Developed by Sara Ali")
+        print("1. Get current weather by city")
+        print("2. Get current weather by location")
+        print("3. Get 5-day forecast by city")
+        print("4. Info")
+        print("5. Exit")
+        choice = int(input("Enter your choice: "))
 
-    if choice == 1:
-        city_name = input("Enter city name: ")
-        get_weather_by_city(city_name)
-    elif choice == 2:
-        latitude = float(input("Enter latitude: "))
-        longitude = float(input("Enter longitude: "))
-        get_weather_by_location(latitude, longitude)
-    elif choice == 3:
-        city_name = input("Enter city name: ")
-        get_5_day_forecast(city_name)
-    elif choice == 4:
-        show_info()
-    else:
+        if choice == 1:
+            city_name = input("Enter city name: ")
+            get_weather_by_city(city_name)
+        elif choice == 2:
+            latitude = float(input("Enter latitude: "))
+            longitude = float(input("Enter longitude: "))
+            get_weather_by_location(latitude, longitude)
+        elif choice == 3:
+            city_name = input("Enter city name: ")
+            get_5_day_forecast(city_name)
+        elif choice == 4:
+            show_info()
+        elif choice == 5:
+            print("Exiting the app. Goodbye!")
+            break
+        else:
+            print("Invalid choice, please try again.")
         print("Invalid choice")
 
 if __name__ == "__main__":
