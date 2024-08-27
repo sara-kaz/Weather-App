@@ -1,7 +1,7 @@
 import requests
 import json
 
-api_key = "a324848564b117b70fadd84deae50d18" # OpenWeatherMap API key
+api_key = "a324848564b117b70fadd84deae50d18"
 units = "metric"  # or "imperial" for Fahrenheit
 base_url = "http://api.openweathermap.org/data/2.5/"
 
@@ -44,11 +44,19 @@ def get_5_day_forecast(city_name):
     else:
         print("Failed to fetch forecast data")
 
+def show_info():
+    print("\n--- Info ---")
+    print("This is a weather app developed by Sara Aly.")
+    print("The PM Accelerator is an advanced project management tool designed to streamline workflows and enhance productivity.")
+    print("For more information about the PM Accelerator, visit our website or contact support.\n")
+
 def main():
     print("Weather App")
+    print("Developed by Sara Ali")
     print("1. Get current weather by city")
     print("2. Get current weather by location")
     print("3. Get 5-day forecast by city")
+    print("4. Info")
     choice = int(input("Enter your choice: "))
 
     if choice == 1:
@@ -61,6 +69,8 @@ def main():
     elif choice == 3:
         city_name = input("Enter city name: ")
         get_5_day_forecast(city_name)
+    elif choice == 4:
+        show_info()
     else:
         print("Invalid choice")
 
