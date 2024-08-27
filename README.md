@@ -41,5 +41,13 @@ A simple weather application developed in Python that allows you to get current 
    - Follow the prompts to enter a city name or coordinates and check if it fetches the weather data correctly.
 
 
-## About the PM Accelerator
+## <img src="https://media.licdn.com/dms/image/v2/C560BAQERjWEoRZ15Tg/company-logo_200_200/company-logo_200_200/0/1656545579397/productmanagerinterview_logo?e=2147483647&v=beta&t=x54gWmD8-qQcBwCxttUih9FrSCKKpa-Az-0q7URRN80" width="40"/> About the PM Accelerator 
+
 The PM Accelerator is a comprehensive project management tool designed to enhance productivity and streamline project workflows. It features advanced task management, team collaboration, and real-time tracking capabilities to support effective project execution. For more details, visit our official website or contact our support team.
+
+<div align='center'>
+
+  [![LinkedIn](https://img.icons8.com/?size=60&id=qNUNvR9aEWql&format=png&color=000000)](https://www.linkedin.com/in/drnancyli/) 
+  [![Website](https://img.icons8.com/?size=60&id=VJz2Ob51dvZJ&format=png&color=000000)](https://www.drnancyli.com/) 
+  
+</div>
