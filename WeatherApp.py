@@ -54,6 +54,26 @@ def forecast():
     
     return render_template('index.html', forecast=forecast_list, city=city_name)
 
+@app.route('/weather-by-location', methods=['POST'])
+def weather_by_location():
+    lat = request.form.get('lat')
+    lon = request.form.get('lon')
+    url = f"{base_url}weather?lat={lat}&lon={lon}&units={units}&appid={api_key}"
+    json_data = make_request(url)
+    if json_data.get("cod") != 200:
+        error_message = json_data.get("message", "Failed to fetch weather data")
+        return render_template('index.html', error=error_message)
+    
+    weather_details = {
+        "description": json_data["weather"][0]["description"],
+        "temperature": json_data["main"]["temp"],
+        "feels_like": json_data["main"]["feels_like"],
+        "humidity": json_data["main"]["humidity"],
+        "wind_speed": json_data["wind"]["speed"]
+    }
+
+    return render_template('index.html', weather=weather_details, city=f"({lat}, {lon})")
+
 @app.route('/info')
 def info():
     return render_template('index.html', info=True)
