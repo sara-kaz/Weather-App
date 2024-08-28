@@ -1,60 +1,51 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Weather App</h1>
-        
-        {% if weather %}
-            <div class="weather-info">
-                <h2>Current Weather in {{ city }}</h2>
-                <p>Weather: {{ weather.description }}</p>
-                <p>Temperature: {{ weather.temperature }} °C</p>
-                <p>Feels Like: {{ weather.feels_like }} °C</p>
-                <p>Humidity: {{ weather.humidity }} %</p>
-                <p>Wind Speed: {{ weather.wind_speed }} m/s</p>
-            </div>
-        {% elif forecast %}
-            <div class="forecast-info">
-                <h2>5-Day Forecast for {{ city }}</h2>
-                {% for day in forecast %}
-                    <p>Date: {{ day.date }}</p>
-                    <p>Temperature: {{ day.temperature }} °C</p>
-                    <p>Weather: {{ day.description }}</p>
-                    <hr>
-                {% endfor %}
-            </div>
-        {% elif info %}
-            <div class="info">
-                <p>This is a weather app developed by Sara Ali.</p>
-                <p>The PM Accelerator is an advanced project management tool designed to streamline workflows and enhance productivity.</p>
-                <p>For more information about the PM Accelerator, visit our website or contact support.</p>
-            </div>
-        {% elif error %}
-            <div class="error">
-                <p>Error: {{ error }}</p>
-            </div>
-        {% endif %}
+    <h1>Weather App</h1>
+    <p>Developed by Sara Ali</p>
 
-        <form method="POST" action="/weather">
-            <input type="text" name="city" placeholder="Enter city name" required>
-            <button type="submit">Get Weather</button>
-        </form>
+    <form action="/weather" method="post">
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required>
+        <button type="submit">Get Weather</button>
+    </form>
 
-        <form method="POST" action="/forecast">
-            <input type="text" name="city" placeholder="Enter city name" required>
-            <button type="submit">Get 5-Day Forecast</button>
-        </form>
+    <form action="/forecast" method="post">
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required>
+        <button type="submit">Get Forecast</button>
+    </form>
 
-        <form method="GET" action="/info">
-            <button type="submit">Info</button>
-        </form>
-    </div>
+    <form action="/info" method="get">
+        <button type="submit">Info</button>
+    </form>
+
+    {% if weather %}
+        <h2>Weather in {{ city }}</h2>
+        <p>Description: {{ weather.description }}</p>
+        <p>Temperature: {{ weather.temperature }}°C</p>
+        <p>Feels Like: {{ weather.feels_like }}°C</p>
+        <p>Humidity: {{ weather.humidity }}%</p>
+        <p>Wind Speed: {{ weather.wind_speed }} m/s</p>
+    {% elif forecast %}
+        <h2>Forecast for {{ city }}</h2>
+        <ul>
+            {% for item in forecast %}
+                <li>{{ item.date }}: {{ item.temperature }}°C, {{ item.description }}</li>
+            {% endfor %}
+        </ul>
+    {% elif info %}
+        <h2>About the PM Accelerator</h2>
+        <p>The PM Accelerator is a cutting-edge technology designed to enhance performance and efficiency in various applications. It utilizes advanced algorithms and hardware components to optimize processing speeds and energy usage, making it ideal for high-performance computing tasks.</p>
+    {% endif %}
+
+    {% if error %}
+        <p>Error: {{ error }}</p>
+    {% endif %}
 </body>
 </html>
