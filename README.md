@@ -3,7 +3,7 @@
 A simple weather application developed in Python that allows you to get current weather data, forecast, and view information about the PM Accelerator.
 
 ## Features
-- Get current weather by city name or location (latitude and longitude).
+- Get current weather by city name.
 - View a 5-day weather forecast by city name.
 - Information button providing a description of the PM Accelerator.
 
