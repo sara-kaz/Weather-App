@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-api_key = "a324848564b117b70fadd84deae50d18"  # OpenWeatherMap API Key
+api_key = "a324848564b117b70fadd84deae50d18"  # Replace with your OpenWeatherMap API Key
 units = "metric"  # or "imperial" for Fahrenheit
 base_url = "http://api.openweathermap.org/data/2.5/"
 
