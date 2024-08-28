@@ -4,48 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Weather App</h1>
-    <p>Developed by Sara Ali</p>
+    <div class="container">
+        <h1>Weather App</h1>
+        <p>Developed by Sara Ali</p>
 
-    <form action="/weather" method="post">
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city" required>
-        <button type="submit">Get Weather</button>
-    </form>
+        <form action="/weather" method="post">
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required>
+            <button type="submit">Get Weather</button>
+        </form>
 
-    <form action="/forecast" method="post">
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city" required>
-        <button type="submit">Get Forecast</button>
-    </form>
+        <form action="/forecast" method="post">
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required>
+            <button type="submit">Get Forecast</button>
+        </form>
 
-    <form action="/info" method="get">
-        <button type="submit">Info</button>
-    </form>
+        <form action="/info" method="get">
+            <button type="submit">Info</button>
+        </form>
 
-    {% if weather %}
-        <h2>Weather in {{ city }}</h2>
-        <p>Description: {{ weather.description }}</p>
-        <p>Temperature: {{ weather.temperature }}°C</p>
-        <p>Feels Like: {{ weather.feels_like }}°C</p>
-        <p>Humidity: {{ weather.humidity }}%</p>
-        <p>Wind Speed: {{ weather.wind_speed }} m/s</p>
-    {% elif forecast %}
-        <h2>Forecast for {{ city }}</h2>
-        <ul>
-            {% for item in forecast %}
-                <li>{{ item.date }}: {{ item.temperature }}°C, {{ item.description }}</li>
-            {% endfor %}
-        </ul>
-    {% elif info %}
-        <h2>About the PM Accelerator</h2>
-        <p>The PM Accelerator is a cutting-edge technology designed to enhance performance and efficiency in various applications. It utilizes advanced algorithms and hardware components to optimize processing speeds and energy usage, making it ideal for high-performance computing tasks.</p>
-    {% endif %}
+        {% if weather %}
+            <div class="weather-info">
+                <h2>Weather in {{ city }}</h2>
+                <p>Description: {{ weather.description }}</p>
+                <p>Temperature: {{ weather.temperature }}°C</p>
+                <p>Feels Like: {{ weather.feels_like }}°C</p>
+                <p>Humidity: {{ weather.humidity }}%</p>
+                <p>Wind Speed: {{ weather.wind_speed }} m/s</p>
+            </div>
+        {% elif forecast %}
+            <div class="forecast-info">
+                <h2>Forecast for {{ city }}</h2>
+                <ul>
+                    {% for item in forecast %}
+                        <li>{{ item.date }}: {{ item.temperature }}°C, {{ item.description }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% elif info %}
+            <div class="info-section">
+                <h2>About the PM Accelerator</h2>
+                <p>The PM Accelerator is a cutting-edge technology designed to enhance performance and efficiency in various applications. It utilizes advanced algorithms and hardware components to optimize processing speeds and energy usage, making it ideal for high-performance computing tasks.</p>
+            </div>
+        {% endif %}
 
-    {% if error %}
-        <p>Error: {{ error }}</p>
-    {% endif %}
+        {% if error %}
+            <p class="error">Error: {{ error }}</p>
+        {% endif %}
+    </div>
 </body>
 </html>
