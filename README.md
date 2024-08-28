@@ -1,4 +1,9 @@
-# Weather App
+<div align='center'>
+   
+# Weather App 
+![logo](https://img.icons8.com/?size=100&id=3RZmbgKAmbsY&format=png&color=000000)
+
+</div>
 
 A simple weather application developed in Python that allows you to get current weather data, forecast, and view information about the PM Accelerator.
 
