@@ -80,7 +80,7 @@ The PM Accelerator is a comprehensive project management tool designed to enhanc
 
 <div align='center'>
 
-  [![LinkedIn](https://img.icons8.com/?size=60&id=qNUNvR9aEWql&format=png&color=000000)](https://www.linkedin.com/in/drnancyli/) 
+  [![LinkedIn](https://img.icons8.com/?size=60&id=qNUNvR9aEWql&format=png&color=000000)](https://www.linkedin.com/school/productmanagerinterview/) 
   [![Website](https://img.icons8.com/?size=60&id=VJz2Ob51dvZJ&format=png&color=000000)](https://www.drnancyli.com/) 
   
 </div>
