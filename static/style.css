@@ -47,7 +47,7 @@ h1 {
 
 .weather-info i, .forecast-info i {
     margin-right: 8px;
-    color: #e4a1fc; /* Adjust color for icons */
+    color: #a1d0fc; /* Adjust color for icons */
 }
 
 form {
@@ -68,7 +68,7 @@ button {
     padding: 10px 20px;
     font-size: 1em;
     color: #fff;
-    background-color: #e4a1fc;
+    background-color: #a1d0fc;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -76,7 +76,7 @@ button {
 }
 
 button:hover {
-    background-color: #a800c9;
+    background-color: #196ef7;
 }
 
 button i {
@@ -108,7 +108,7 @@ button i {
 }
 
 .info-card a {
-    color: #e4a1fc;
+    color: #a1d0fc;
     text-decoration: none;
 }
 
