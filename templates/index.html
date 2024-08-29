@@ -10,48 +10,55 @@
 </head>
 <body>
     <div class="container">
-        <h1>Get the Weather</h1>
+        <h1>Weather and Forecast</h1>
         
+        <!-- Display weather information -->
         {% if weather %}
             <div class="weather-info">
-                <h2>{{ city }}</h2>
+                <h2>Weather in {{ city }}</h2>
                 <div class="temperature-container">
                     <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="Weather Icon" class="weather-icon">
                     <h1 class="temperature">{{ weather.temperature }} °C</h1>
                 </div>
-                <p><i class="fas fa-cloud"></i> Weather: {{ weather.description }}</p>
-                <p><i class="fas fa-temperature-low"></i> Feels Like: {{ weather.feels_like }} °C</p>
+                <p><i class="fas fa-cloud"></i> Condition: {{ weather.description }}</p>
+                <p><i class="fas fa-thermometer-half"></i> Feels Like: {{ weather.feels_like }} °C</p>
                 <p><i class="fas fa-tint"></i> Humidity: {{ weather.humidity }} %</p>
                 <p><i class="fas fa-wind"></i> Wind Speed: {{ weather.wind_speed }} m/s</p>
             </div>
+        
+        <!-- Display forecast information -->
         {% elif forecast %}
             <div class="forecast-info">
-                <h2>5-Day Forecast for {{ city }}</h2>
+                <h2>5-Day Weather Forecast for {{ city }}</h2>
                 {% for day in forecast %}
                     <div class="forecast-day">
                         <div class="temperature-container">
                             <img src="http://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="Weather Icon" class="weather-icon">
                             <h1 class="temperature">{{ day.temperature }} °C</h1>
                         </div>
-                        <p><i class="fas fa-calendar-alt"></i> Date: {{ day.date }}</p>
-                        <p><i class="fas fa-cloud"></i> Weather: {{ day.description }}</p>
+                        <p><i class="fas fa-calendar-day"></i> Date: {{ day.date }}</p>
+                        <p><i class="fas fa-cloud"></i> Condition: {{ day.description }}</p>
                     </div>
                     <hr>
                 {% endfor %}
             </div>
+        
+        <!-- Display informational content -->
         {% elif info %}
             <div class="info-card">
-                <h2>PM Accelerator</h2>
-                <p>The PM Accelerator is an advanced project management tool designed to streamline workflows and enhance productivity.</p>
-                <p>Features include:</p>
+                <h2>About PM Accelerator</h2>
+                <p>The PM Accelerator is an advanced project management tool designed to optimize workflows and enhance team productivity.</p>
+                <p>Key Features:</p>
                 <ul>
-                    <li>Project Planning and Tracking</li>
-                    <li>Resource Management</li>
+                    <li>Comprehensive Project Planning</li>
+                    <li>Resource Management Tools</li>
                     <li>Real-time Collaboration</li>
                     <li>Advanced Analytics and Reporting</li>
                 </ul>
-                <p>For more information, visit our <a href="https://www.drnancyli.com/">Website</a>.</p>
+                <p>Learn more on our <a href="https://www.drnancyli.com/">official website</a>.</p>
             </div>
+        
+        <!-- Display error message -->
         {% elif error %}
             <div class="error">
                 <p>Error: {{ error }}</p>
@@ -61,7 +68,7 @@
         <!-- Forms for user input -->
         <form method="POST" action="/weather">
             <input type="text" name="city" placeholder="Enter city name" required>
-            <button type="submit"><i class="fas fa-search-location"></i> Get Weather</button>
+            <button type="submit"><i class="fas fa-search-location"></i> Check Weather</button>
         </form>
 
         <form method="POST" action="/forecast">
@@ -70,16 +77,18 @@
         </form>
 
         <form method="POST" action="/weather-by-location-form">
-            <input type="text" id="lat" name="lat" placeholder="Enter latitude" required>
-            <input type="text" id="lon" name="lon" placeholder="Enter longitude" required>
-            <button type="submit"><i class="fas fa-map-marker-alt"></i> Get Weather by Location</button>
+            <input type="text" id="lat" name="lat" placeholder="Latitude" required>
+            <input type="text" id="lon" name="lon" placeholder="Longitude" required>
+            <button type="submit"><i class="fas fa-map-marker-alt"></i> Check Weather by Location</button>
         </form>
 
         <form method="GET" action="/info">
-            <button type="submit"><i class="fas fa-info-circle"></i> Info</button>
+            <button type="submit"><i class="fas fa-info-circle"></i> More Info</button>
         </form>
 
-        <p>&copy 2024, Sara Ali</p>
+        <footer>
+            <p>&copy; 2024, Sara Ali</p>
+        </footer>
     </div>
 </body>
 </html>
