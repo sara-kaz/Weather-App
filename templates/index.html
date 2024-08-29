@@ -17,8 +17,8 @@
             <div class="weather-info">
                 <h2>Current Weather in {{ city }}</h2>
                 <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="Weather Icon">
-                <p><i class="fas fa-cloud"></i> Weather: {{ weather.description }}</p>
-                <p><i class="fas fa-thermometer-half"></i> Temperature: {{ weather.temperature }} °C</p>
+                <h3>{{ weather.temperature }} °C</h3><p><i class="fas fa-cloud"></i> Weather: {{ weather.description }}</p>
+                <!--<p><i class="fas fa-thermometer-half"></i> Temperature: {{ weather.temperature }} °C</p> -->
                 <p><i class="fas fa-temperature-low"></i> Feels Like: {{ weather.feels_like }} °C</p>
                 <p><i class="fas fa-tint"></i> Humidity: {{ weather.humidity }} %</p>
                 <p><i class="fas fa-wind"></i> Wind Speed: {{ weather.wind_speed }} m/s</p>
