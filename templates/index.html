@@ -29,10 +29,12 @@
             <div class="forecast-info">
                 <h2>5-Day Forecast for {{ city }}</h2>
                 {% for day in forecast %}
-                    <img src="http://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="Weather Icon">
-                    <p><i class="fas fa-calendar-alt"></i> Date: {{ day.date }}</p>
-                    <p><i class="fas fa-thermometer-half"></i> Temperature: {{ day.temperature }} °C</p>
-                    <p><i class="fas fa-cloud"></i> Weather: {{ day.description }}</p>
+                    <div class="forecast-day">
+                        <img src="http://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="Weather Icon">
+                        <p><i class="fas fa-calendar-alt"></i> Date: {{ day.date }}</p>
+                        <p><i class="fas fa-thermometer-half"></i> Temperature: {{ day.temperature }} °C</p>
+                        <p><i class="fas fa-cloud"></i> Weather: {{ day.description }}</p>
+                    </div>
                     <hr>
                 {% endfor %}
             </div>
@@ -64,6 +66,14 @@
         <form method="POST" action="/forecast">
             <input type="text" name="city" placeholder="Enter city name" required>
             <button type="submit"><i class="fas fa-cloud-sun"></i> Get 5-Day Forecast</button>
+        </form>
+
+        <form method="POST" action="/weather-by-location-form">
+            <label for="lat">Latitude:</label>
+            <input type="text" id="lat" name="lat" placeholder="Enter latitude" required>
+            <label for="lon">Longitude:</label>
+            <input type="text" id="lon" name="lon" placeholder="Enter longitude" required>
+            <button type="submit"><i class="fas fa-map-marker-alt"></i> Get Weather by Location</button>
         </form>
 
         <form method="GET" action="/info">
