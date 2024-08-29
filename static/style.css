@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-image: url('https://images.app.goo.gl/wmNfizWnpATJd3cVA');
     color: #333;
     margin: 0;
     padding: 0;
@@ -13,9 +13,7 @@ body {
     max-width: 800px;
     margin: 20px;
     padding: 20px;
-    background-image: url('https://images.app.goo.gl/wmNfizWnpATJd3cVA'); /* Replace with your image URL */
-    background-size: cover; /* Ensure the image covers the entire container */
-    background-position: center; /* Center the image */
+    background-color: #fff;
     border-radius: 8px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
 }
