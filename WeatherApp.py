@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from datetime import datetime
 import requests
 
 app = Flask(__name__)
@@ -11,6 +12,27 @@ def make_request(url):
     response = requests.get(url)
     return response.json()
 
+def format_date(date_str):
+    # Convert the date string to a datetime object
+    date_obj = datetime.strptime(date_str, '%Y-%m-%d')
+    
+    # Format the date as "Tuesday, 24th July"
+    formatted_date = date_obj.strftime('%A, %-d')
+    
+    # Get the day number
+    day = int(date_obj.strftime('%d'))
+    
+    # Determine the appropriate suffix
+    if 4 <= day <= 20 or 24 <= day <= 30:
+        suffix = "th"
+    else:
+        suffix = ["st", "nd", "rd", "th"][min(day % 10, 3)]
+    
+    # Add the suffix and month
+    formatted_date += suffix + date_obj.strftime(' %B')
+    
+    return formatted_date
+    
 @app.route('/')
 def index():
     return render_template('index.html')
