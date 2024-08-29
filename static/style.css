@@ -1,6 +1,8 @@
 body {
     font-family: Arial, sans-serif;
-    background-image: url('https://images.app.goo.gl/wmNfizWnpATJd3cVA');
+    background-image: url('https://example.com/path-to-your-gif.gif'); /* Replace with the GIF URL */
+    background-size: cover; /* Ensure the GIF covers the entire body */
+    background-position: center; /* Center the GIF */
     color: #333;
     margin: 0;
     padding: 0;
