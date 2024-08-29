@@ -4,34 +4,13 @@ import requests
 
 app = Flask(__name__)
 
-api_key = "a324848564b117b70fadd84deae50d18"  # OpenWeatherMap API Key
+api_key = "a324848564b117b70fadd84deae50d18"  # Replace with your OpenWeatherMap API Key
 units = "metric"  # Use "imperial" for Fahrenheit
 base_url = "http://api.openweathermap.org/data/2.5/"
 
 def make_request(url):
     response = requests.get(url)
     return response.json()
-
-def format_date(date_str):
-    # Convert the date string to a datetime object
-    date_obj = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
-    
-    # Format the date as "Tuesday, 24th July"
-    formatted_date = date_obj.strftime('%A, %-d')
-    
-    # Get the day number
-    day = int(date_obj.strftime('%d'))
-    
-    # Determine the appropriate suffix
-    if 4 <= day <= 20 or 24 <= day <= 30:
-        suffix = "th"
-    else:
-        suffix = ["st", "nd", "rd", "th"][min(day % 10, 3)]
-    
-    # Add the suffix and month
-    formatted_date += suffix + date_obj.strftime(' %B')
-    
-    return formatted_date
 
 @app.route('/')
 def index():
@@ -71,7 +50,7 @@ def forecast():
     forecast_list = []
     for i in range(0, len(json_data["list"]), 8):  # 8 intervals per day
         forecast_details = {
-            "date": format_date(json_data["list"][i]["dt_txt"]),  # Format the date
+            "date": json_data["list"][i]["dt_txt"],
             "temperature": json_data["list"][i]["main"]["temp"],
             "description": json_data["list"][i]["weather"][0]["description"],
             "icon": json_data["list"][i]["weather"][0]["icon"]  # Get weather icon code
