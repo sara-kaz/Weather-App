@@ -28,7 +28,7 @@ A simple weather application developed in Python that allows you to get current 
      cd Weather-App
      ```
 
-### Step 2: Set Up Your Python Environment
+### Step 2: Set Up Your Python Environment _(optional)_
 
 1. **Create a Virtual Environment**:
 
