@@ -58,8 +58,8 @@ def forecast():
     
     return render_template('index.html', forecast=forecast_list, city=city_name)
 
-@app.route('/weather-by-location', methods=['POST'])
-def weather_by_location():
+@app.route('/weather-by-location-form', methods=['POST'])
+def weather_by_location_form():
     lat = request.form.get('lat')
     lon = request.form.get('lon')
     url = f"{base_url}weather?lat={lat}&lon={lon}&units={units}&appid={api_key}"
