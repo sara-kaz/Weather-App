@@ -30,9 +30,11 @@
                 <h2>5-Day Forecast for {{ city }}</h2>
                 {% for day in forecast %}
                     <div class="forecast-day">
-                        <img src="http://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="Weather Icon">
+                        <div class="temperature-container">
+                            <img src="http://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="Weather Icon" class="weather-icon">
+                            <h1 class="temperature">{{ day.temperature }} °C</h1>
+                        </div>
                         <p><i class="fas fa-calendar-alt"></i> Date: {{ day.date }}</p>
-                        <p><i class="fas fa-thermometer-half"></i> Temperature: {{ day.temperature }} °C</p>
                         <p><i class="fas fa-cloud"></i> Weather: {{ day.description }}</p>
                     </div>
                     <hr>
