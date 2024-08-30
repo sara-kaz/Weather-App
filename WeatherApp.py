@@ -40,6 +40,8 @@ def get_weather_details(data: Dict[str, Any]) -> Dict[str, Any]:
     return {
         "description": weather.get("description", "N/A"),
         "temperature": main.get("temp", "N/A"),
+        "temp_min": main.get("temp_min", "N/A"),
+        "temp_max": main.get("temp_max", "N/A"),
         "feels_like": main.get("feels_like", "N/A"),
         "humidity": main.get("humidity", "N/A"),
         "wind_speed": wind.get("speed", "N/A"),
@@ -56,7 +58,7 @@ def weather():
     """Handle the weather request for a city."""
     city_name = request.form.get('city')
     url = f"{BASE_URL}weather?q={city_name}&units={UNITS}&appid={API_KEY}"
-    
+
     try:
         json_data = make_api_request(url)
         weather_details = get_weather_details(json_data)
@@ -69,7 +71,7 @@ def forecast():
     """Handle the 5-day forecast request for a city."""
     city_name = request.form.get('city')
     url = f"{BASE_URL}forecast?q={city_name}&units={UNITS}&appid={API_KEY}"
-    
+
     try:
         json_data = make_api_request(url)
         forecast_list = get_forecast_list(json_data)
@@ -91,6 +93,8 @@ def get_forecast_list(data: Dict[str, Any]) -> List[Dict[str, Any]]:
         {
             "date": item.get("dt_txt", "N/A"),
             "temperature": item.get("main", {}).get("temp", "N/A"),
+            "temp_min": item.get("main", {}).get("temp_min", "N/A"),
+            "temp_max": item.get("main", {}).get("temp_max", "N/A"),
             "description": item.get("weather", [{}])[0].get("description", "N/A"),
             "icon": item.get("weather", [{}])[0].get("icon", "N/A")
         }
@@ -103,7 +107,7 @@ def weather_by_location_form():
     lat = request.form.get('lat')
     lon = request.form.get('lon')
     url = f"{BASE_URL}weather?lat={lat}&lon={lon}&units={UNITS}&appid={API_KEY}"
-    
+
     try:
         json_data = make_api_request(url)
         weather_details = get_weather_details(json_data)
