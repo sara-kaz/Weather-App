@@ -73,8 +73,7 @@ h1, h2, h3 {
 .info-card img.logo {
     max-width: 200px;
     height: auto;
-    margin-bottom: 4px;
-    align-items: center;
+    margin-bottom:0%;
 }
 
 .info-card h2 {
