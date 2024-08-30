@@ -4,7 +4,7 @@ import requests
 
 app = Flask(__name__)
 
-api_key = "a324848564b117b70fadd84deae50d18"  # Your OpenWeatherMap API Key
+api_key = "a324848564b117b70fadd84deae50d18"  # Replace with your OpenWeatherMap API Key
 units = "metric"  # Use "imperial" for Fahrenheit
 base_url = "http://api.openweathermap.org/data/2.5/"
 
@@ -16,64 +16,31 @@ def make_request(url):
 def index():
     return render_template('index.html')
 
-def get_weather_by_address(address):
-    # First, get the coordinates from the address
-    geocoding_url = f"http://api.openweathermap.org/geo/1.0/direct?q={address}&limit=1&appid={api_key}"
-    geocoding_response = requests.get(geocoding_url)
-    geocoding_data = geocoding_response.json()
-    
-    if not geocoding_data:
-        return None, "Address not found"
-    
-    lat = geocoding_data[0]['lat']
-    lon = geocoding_data[0]['lon']
-    
-    # Now use these coordinates to get the weather
-    weather_url = f"{base_url}weather?lat={lat}&lon={lon}&units={units}&appid={api_key}"
-    weather_response = requests.get(weather_url)
-    weather_data = weather_response.json()
-    
-    if weather_data.get("cod") != 200:
-        error_message = weather_data.get("message", "Failed to fetch weather data")
-        return None, error_message
-    
-    weather_details = {
-        "description": weather_data["weather"][0]["description"],
-        "temperature": weather_data["main"]["temp"],
-        "feels_like": weather_data["main"]["feels_like"],
-        "humidity": weather_data["main"]["humidity"],
-        "wind_speed": weather_data["wind"]["speed"],
-        "icon": weather_data["weather"][0]["icon"]
-    }
-
-    return weather_details, None
-
 @app.route('/weather', methods=['POST'])
 def weather():
-    address = request.form.get('address')
-    weather_details, error = get_weather_by_address(address)
+    city_name = request.form.get('city')
+    url = f"{base_url}weather?q={city_name}&units={units}&appid={api_key}"
+    json_data = make_request(url)
     
-    if error:
-        return render_template('index.html', error=error)
+    if json_data.get("cod") != 200:
+        error_message = json_data.get("message", "Failed to fetch weather data")
+        return render_template('index.html', error=error_message)
     
-    return render_template('index.html', weather=weather_details, city=address)
+    weather_details = {
+        "description": json_data["weather"][0]["description"],
+        "temperature": json_data["main"]["temp"],
+        "feels_like": json_data["main"]["feels_like"],
+        "humidity": json_data["main"]["humidity"],
+        "wind_speed": json_data["wind"]["speed"],
+        "icon": json_data["weather"][0]["icon"]  # Get weather icon code
+    }
+
+    return render_template('index.html', weather=weather_details, city=city_name)
 
 @app.route('/forecast', methods=['POST'])
 def forecast():
-    address = request.form.get('address')
-    
-    # Get coordinates from address
-    geocoding_url = f"http://api.openweathermap.org/geo/1.0/direct?q={address}&limit=1&appid={api_key}"
-    geocoding_response = requests.get(geocoding_url)
-    geocoding_data = geocoding_response.json()
-    
-    if not geocoding_data:
-        return render_template('index.html', error="Address not found")
-    
-    lat = geocoding_data[0]['lat']
-    lon = geocoding_data[0]['lon']
-    
-    url = f"{base_url}forecast?lat={lat}&lon={lon}&units={units}&appid={api_key}"
+    city_name = request.form.get('city')
+    url = f"{base_url}forecast?q={city_name}&units={units}&appid={api_key}"
     json_data = make_request(url)
     
     if json_data.get("cod") != "200":
@@ -86,11 +53,33 @@ def forecast():
             "date": json_data["list"][i]["dt_txt"],
             "temperature": json_data["list"][i]["main"]["temp"],
             "description": json_data["list"][i]["weather"][0]["description"],
-            "icon": json_data["list"][i]["weather"][0]["icon"]
+            "icon": json_data["list"][i]["weather"][0]["icon"]  # Get weather icon code
         }
         forecast_list.append(forecast_details)
     
-    return render_template('index.html', forecast=forecast_list, city=address)
+    return render_template('index.html', forecast=forecast_list, city=city_name)
+
+@app.route('/weather-by-location-form', methods=['POST'])
+def weather_by_location_form():
+    lat = request.form.get('lat')
+    lon = request.form.get('lon')
+    url = f"{base_url}weather?lat={lat}&lon={lon}&units={units}&appid={api_key}"
+    json_data = make_request(url)
+    
+    if json_data.get("cod") != 200:
+        error_message = json_data.get("message", "Failed to fetch weather data")
+        return render_template('index.html', error=error_message)
+    
+    weather_details = {
+        "description": json_data["weather"][0]["description"],
+        "temperature": json_data["main"]["temp"],
+        "feels_like": json_data["main"]["feels_like"],
+        "humidity": json_data["main"]["humidity"],
+        "wind_speed": json_data["wind"]["speed"],
+        "icon": json_data["weather"][0]["icon"]  # Get weather icon code
+    }
+
+    return render_template('index.html', weather=weather_details, city=f"({lat}, {lon})")
 
 @app.route('/info')
 def info():
