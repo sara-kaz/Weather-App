@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Include FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <h1>Get the Weather</h1>
-
+        
         {% if weather %}
             <div class="weather-info">
                 <h2>{{ city }}</h2>
@@ -59,20 +60,27 @@
 
         <!-- Forms for user input -->
         <form method="POST" action="/weather">
-            <input type="text" name="address" placeholder="Enter address" required>
-            <button type="submit"><i class="fas fa-search-location"></i> Get Weather</button>
+            <input type="text" name="city" placeholder="Enter city name" required>
+            <button type="submit"><i class="fas fa-search-location"></i> Get Weather by City</button>
         </form>
 
         <form method="POST" action="/forecast">
-            <input type="text" name="address" placeholder="Enter address" required>
+            <input type="text" name="city" placeholder="Enter city name" required>
             <button type="submit"><i class="fas fa-cloud-sun"></i> Get 5-Day Forecast</button>
+        </form>
+
+        <form method="POST" action="/weather-by-location-form">
+            <input type="text" id="lat" name="lat" placeholder="Enter latitude" required>
+            <input type="text" id="lon" name="lon" placeholder="Enter longitude" required>
+            <button type="submit"><i class="fas fa-map-marker-alt"></i> Get Weather by Location</button>
+            <a href="https://www.latlong.net/convert-address-to-lat-long.html" class="button" target="_blank">Convert Address to Lat/Long</a>
         </form>
 
         <form method="GET" action="/info">
             <button type="submit"><i class="fas fa-info-circle"></i> Info</button>
         </form>
 
-        <p>&copy; 2024, Sara Ali</p>
+        <p>&copy 2024, Sara Ali</p>
     </div>
 </body>
 </html>
