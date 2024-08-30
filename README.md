@@ -10,6 +10,8 @@ A simple weather application developed in Python that allows you to get current 
 ## Features
 - Get current weather by city name.
 - View a 5-day weather forecast by city name.
+- Retrieve weather information by latitude and longitude.
+- Convert an address to latitude and longitude for location-based weather.
 - Information button providing a description of the PM Accelerator.
 
 ## Getting Started
@@ -49,37 +51,50 @@ A simple weather application developed in Python that allows you to get current 
      ```bash
      source venv/bin/activate
      ```
- 3. **Install Required Packages:**
-   - Make sure you have Python installed.
-   - Use `pip` to install the `requests` and `Flask` libraries if you haven't already:
+
+3. **Install Required Packages:**
+   - Ensure Python is installed.
+   - Use `pip` to install the necessary libraries:
      ```bash
-     pip install requests
-     pip install Flask
+     pip install requests Flask
      ```
-     
-     
+
 ### Step 3: Run the Flask Application
 
+1. **Start the Application:**
    - In your terminal, navigate to the directory where `WeatherApp.py` is located, and run the script:
      ```bash
      python WeatherApp.py
      ```
 
-### Step 4: Open Your Browser
+2. **Access the Application:**
+   - Open your web browser and visit `http://127.0.0.1:5000` to view and interact with the app.
 
-Visit `http://127.0.0.1:5000` in your web browser to see your application. You should see your HTML interface where you can interact with the app.
+### Step 4: Use the Application
 
+1. **Check Current Weather:**
+   - Enter a city name in the input field and click "Get Weather" to retrieve the current weather details.
 
-### Step 5: Test the Application:
-   - Enter a city name and check if it fetches the weather data correctly.
-   - Enter a city name and check if it fetches the 5-day forecast.
-   - Enter the latitude and longitude coordinates of a location and check if it fetches the weather data correctly.
-     - _You can use the Convert Address Button to change an address to the needed latitude and longitude coordinates_
+2. **View 5-Day Forecast:**
+   - Enter a city name and click "Get Forecast" to view the 5-day weather forecast.
 
+3. **Search by Location:**
+   - Enter latitude and longitude coordinates and click "Get Weather by Location" to retrieve the weather data for that location.
+   - Use the "Convert Address" button to obtain latitude and longitude from an address.
+
+4. **Learn About PM Accelerator:**
+   - Click the "Info" button to view a description of the PM Accelerator program.
+
+### Testing the Application
+
+- Verify that entering a city name returns accurate weather data.
+- Check that the 5-day forecast correctly displays for a given city.
+- Ensure that searching by latitude and longitude retrieves the correct weather information.
+- Test the address conversion feature for obtaining latitude and longitude coordinates.
 
 ## <img src="https://media.licdn.com/dms/image/v2/C560BAQERjWEoRZ15Tg/company-logo_200_200/company-logo_200_200/0/1656545579397/productmanagerinterview_logo?e=2147483647&v=beta&t=x54gWmD8-qQcBwCxttUih9FrSCKKpa-Az-0q7URRN80" width="40"/> About the PM Accelerator 
 
-The Product Manager Accelerator Program is designed to support PM professionals through every stage of their career. From students looking for entry-level jobs to Directors looking to take on a leadership role, our program has helped over hundreds of students fulfill their career aspirations. For more details, visit our official website or contact our support team.
+The Product Manager Accelerator Program is designed to support PM professionals through every stage of their career. From students seeking entry-level jobs to Directors aiming for leadership roles, our program has helped hundreds of students achieve their career aspirations. For more details, visit our official website or contact our support team.
 
 <div align='center'>
 
@@ -87,3 +102,13 @@ The Product Manager Accelerator Program is designed to support PM professionals 
   [![Website](https://img.icons8.com/?size=60&id=VJz2Ob51dvZJ&format=png&color=000000)](https://www.drnancyli.com/) 
   
 </div>
+
+---
+
+### Summary of What Was Done
+
+- **Weather Fetching:** Implemented functionality to retrieve current weather data and 5-day forecasts using the OpenWeatherMap API.
+- **Search by Coordinates:** Added the ability to search for weather using latitude and longitude coordinates, with address-to-coordinates conversion.
+- **PM Accelerator Info:** Integrated a section to display information about the Product Manager Accelerator program.
+- **Error Handling:** Included error handling to display appropriate messages if the weather data cannot be retrieved.
+- **UI Design:** Created a user-friendly HTML interface with CSS for styling and used FontAwesome for icons.
