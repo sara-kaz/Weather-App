@@ -3,8 +3,11 @@
     --primary-color: #a1d0fc;
     --primary-hover-color: #196ef7;
     --text-color: #333;
+    --light-text-color: #555;
     --background-color: rgba(255, 255, 255, 0.8);
-    --box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    --box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    --border-radius: 5px;
+    --transition: all 0.3s ease;
 }
 
 /* Base Styles */
@@ -19,17 +22,17 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh; /* Ensure full height on all devices */
+    min-height: 100vh;
 }
 
 /* Container */
 .container {
     max-width: 800px;
-    width: 90%; /* Responsive width */
+    width: 90%;
     margin: 20px;
     padding: 20px;
     background-color: var(--background-color);
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
 }
 
@@ -37,20 +40,22 @@ body {
 h1, h2, h3 {
     text-align: center;
     color: var(--text-color);
+    margin-bottom: 20px;
 }
 
-/* Weather and Forecast Information */
+/* Common Card Styles */
 .weather-info, 
 .forecast-info, 
 .info-card, 
 .error {
     background-color: #fff;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     margin-bottom: 20px;
 }
 
+/* Weather and Forecast Information */
 .weather-icon {
     width: 100px;
     height: auto;
@@ -70,24 +75,45 @@ h1, h2, h3 {
     color: var(--primary-color);
 }
 
+/* Info Card */
+.info-card {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
 .info-card img.logo {
     max-width: 200px;
     height: auto;
-    margin-bottom:0%;
-}
-
-.info-card h2 {
-    color: #333;
     margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .info-card p {
     font-size: 1.1em;
     line-height: 1.6;
     margin-bottom: 15px;
-    color: #555;
+    color: var(--light-text-color);
 }
 
+.info-card ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.info-card a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.info-card a:hover {
+    color: var(--primary-hover-color);
+    text-decoration: underline;
+}
+
+/* Social Links */
 .social-links {
     display: flex;
     justify-content: center;
@@ -97,7 +123,7 @@ h1, h2, h3 {
 
 .social-links a {
     display: inline-block;
-    transition: transform 0.3s ease;
+    transition: var(--transition);
 }
 
 .social-links a:hover {
@@ -127,7 +153,7 @@ input[type="text"] {
     width: 100%;
     font-size: 1em;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     margin-bottom: 10px;
     box-sizing: border-box;
 }
@@ -140,14 +166,13 @@ button,
     color: #fff;
     background-color: var(--primary-color);
     border: none;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     cursor: pointer;
     margin: 5px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    transition: background-color 0.3s ease;
-    align-self: center;
+    transition: var(--transition);
 }
 
 button:hover, 
@@ -157,37 +182,6 @@ button:hover,
 
 button i {
     margin-right: 5px;
-}
-
-/* Info Card */
-.info-card {
-    max-width: 600px;
-    margin: 20px auto;
-}
-
-.info-card h2 {
-    color: var(--text-color);
-}
-
-.info-card p {
-    font-size: 1.1em;
-    margin: 10px 0;
-}
-
-.info-card ul {
-    list-style-type: disc;
-    margin-left: 20px;
-}
-
-.info-card a {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.info-card a:hover {
-    color: var(--primary-hover-color);
-    text-decoration: underline;
 }
 
 /* Error Message */
