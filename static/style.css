@@ -168,7 +168,7 @@ button,
     border: none;
     border-radius: var(--border-radius);
     cursor: pointer;
-    margin: 5px;
+    
     text-align: center;
     text-decoration: none;
     display: inline-block;
