@@ -173,6 +173,8 @@ button,
     text-decoration: none;
     display: inline-block;
     transition: var(--transition);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 button:hover, 
