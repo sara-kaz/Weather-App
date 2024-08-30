@@ -71,12 +71,15 @@ Visit `http://127.0.0.1:5000` in your web browser to see your application. You s
 
 
 ### Step 5: Test the Application:
-   - Follow the prompts to enter a city name and check if it fetches the weather data correctly.
+   - Enter a city name and check if it fetches the weather data correctly.
+   - Enter a city name and check if it fetches the 5-day forecast.
+   - Enter the latitude and longitude coordinates of a location and check if it fetches the weather data correctly.
+     - _You can use the Convert Address Button to change an address to the needed latitude and longitude coordinates_
 
 
 ## <img src="https://media.licdn.com/dms/image/v2/C560BAQERjWEoRZ15Tg/company-logo_200_200/company-logo_200_200/0/1656545579397/productmanagerinterview_logo?e=2147483647&v=beta&t=x54gWmD8-qQcBwCxttUih9FrSCKKpa-Az-0q7URRN80" width="40"/> About the PM Accelerator 
 
-The PM Accelerator is a comprehensive project management tool designed to enhance productivity and streamline project workflows. It features advanced task management, team collaboration, and real-time tracking capabilities to support effective project execution. For more details, visit our official website or contact our support team.
+The Product Manager Accelerator Program is designed to support PM professionals through every stage of their career. From students looking for entry-level jobs to Directors looking to take on a leadership role, our program has helped over hundreds of students fulfill their career aspirations. For more details, visit our official website or contact our support team.
 
 <div align='center'>
 
