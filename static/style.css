@@ -161,7 +161,7 @@ input[type="text"] {
 /* Buttons */
 button, 
 .button {
-    padding: 10px 20px;
+    padding: 10px 10px;
     font-size: 1em;
     color: #fff;
     background-color: var(--primary-color);
@@ -171,7 +171,7 @@ button,
     margin: 5px;
     text-align: center;
     text-decoration: none;
-    display: flexbox;
+    display: inline-block;
     transition: var(--transition);
 }
 
