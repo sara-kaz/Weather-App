@@ -1,3 +1,4 @@
+/* Base Styles */
 body {
     font-family: Arial, sans-serif;
     background-image: url('https://i.makeagif.com/media/4-05-2016/utmjeB.gif');
@@ -11,6 +12,7 @@ body {
     align-items: center;
 }
 
+/* Container */
 .container {
     max-width: 800px;
     margin: 20px;
@@ -20,12 +22,17 @@ body {
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Typography */
 h1 {
     text-align: center;
     color: #333;
 }
 
-.weather-info, .forecast-info, .info-card, .error {
+/* Weather and Forecast Information */
+.weather-info, 
+.forecast-info, 
+.info-card, 
+.error {
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
@@ -33,23 +40,27 @@ h1 {
     margin-bottom: 20px;
 }
 
-.weather-info img, .forecast-info img {
+.weather-info img, 
+.forecast-info img {
     width: 100px; /* Adjust icon size */
     height: auto;
     vertical-align: middle;
     margin-right: 10px;
 }
 
-.weather-info p, .forecast-info p {
+.weather-info p, 
+.forecast-info p {
     font-size: 1.2em;
     margin: 10px 0;
 }
 
-.weather-info i, .forecast-info i {
+.weather-info i, 
+.forecast-info i {
     margin-right: 8px;
     color: #a1d0fc; /* Adjust color for icons */
 }
 
+/* Form Styles */
 form {
     text-align: center;
     margin: 20px 0;
@@ -64,7 +75,9 @@ input[type="text"] {
     margin-bottom: 10px;
 }
 
-button {
+/* Buttons */
+button, 
+.button {
     padding: 10px 20px;
     font-size: 1em;
     color: #fff;
@@ -73,9 +86,13 @@ button {
     border-radius: 5px;
     cursor: pointer;
     margin: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
 }
 
-button:hover {
+button:hover, 
+.button:hover {
     background-color: #196ef7;
 }
 
@@ -83,31 +100,14 @@ button i {
     margin-right: 5px;
 }
 
-.button {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    text-align: center;
-    text-decoration: none;
-    color: #fff;
-    background-color: #a1d0fc;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.button:hover {
-    background-color: #196ef7;
-}
-
+/* Info Card */
 .info-card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
     max-width: 600px;
     margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 .info-card h2 {
@@ -133,11 +133,13 @@ button i {
     text-decoration: underline;
 }
 
+/* Error Message */
 .error p {
     color: #ff0000;
     font-size: 1.2em;
 }
 
+/* Temperature Container */
 .temperature-container {
     display: flex;
     align-items: center;
