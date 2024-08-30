@@ -1,31 +1,42 @@
+/* Global Styles */
+:root {
+    --primary-color: #a1d0fc;
+    --primary-hover-color: #196ef7;
+    --text-color: #333;
+    --background-color: rgba(255, 255, 255, 0.8);
+    --box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
 /* Base Styles */
 body {
     font-family: Arial, sans-serif;
     background-image: url('https://i.makeagif.com/media/4-05-2016/utmjeB.gif');
-    background-size: cover; /* Ensure the GIF covers the entire body */
-    background-position: center; /* Center the GIF */
-    color: #333;
+    background-size: cover;
+    background-position: center;
+    color: var(--text-color);
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 100vh; /* Ensure full height on all devices */
 }
 
 /* Container */
 .container {
     max-width: 800px;
+    width: 90%; /* Responsive width */
     margin: 20px;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    background-color: var(--background-color);
     border-radius: 8px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow);
 }
 
 /* Typography */
-h1 {
+h1, h2, h3 {
     text-align: center;
-    color: #333;
+    color: var(--text-color);
 }
 
 /* Weather and Forecast Information */
@@ -36,13 +47,12 @@ h1 {
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow);
     margin-bottom: 20px;
 }
 
-.weather-info img, 
-.forecast-info img {
-    width: 100px; /* Adjust icon size */
+.weather-icon {
+    width: 100px;
     height: auto;
     vertical-align: middle;
     margin-right: 10px;
@@ -57,22 +67,30 @@ h1 {
 .weather-info i, 
 .forecast-info i {
     margin-right: 8px;
-    color: #a1d0fc; /* Adjust color for icons */
+    color: var(--primary-color);
 }
 
 /* Form Styles */
+.user-forms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
 form {
-    text-align: center;
-    margin: 20px 0;
+    width: 100%;
+    max-width: 400px;
 }
 
 input[type="text"] {
     padding: 10px;
-    width: 70%;
+    width: 100%;
     font-size: 1em;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 10px;
+    box-sizing: border-box;
 }
 
 /* Buttons */
@@ -81,7 +99,7 @@ button,
     padding: 10px 20px;
     font-size: 1em;
     color: #fff;
-    background-color: #a1d0fc;
+    background-color: var(--primary-color);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -89,11 +107,12 @@ button,
     text-align: center;
     text-decoration: none;
     display: inline-block;
+    transition: background-color 0.3s ease;
 }
 
 button:hover, 
 .button:hover {
-    background-color: #196ef7;
+    background-color: var(--primary-hover-color);
 }
 
 button i {
@@ -104,14 +123,10 @@ button i {
 .info-card {
     max-width: 600px;
     margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 .info-card h2 {
-    color: #333;
+    color: var(--text-color);
 }
 
 .info-card p {
@@ -125,11 +140,13 @@ button i {
 }
 
 .info-card a {
-    color: #a1d0fc;
+    color: var(--primary-color);
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .info-card a:hover {
+    color: var(--primary-hover-color);
     text-decoration: underline;
 }
 
@@ -147,13 +164,26 @@ button i {
     margin: 20px 0;
 }
 
-.weather-icon {
-    width: 100px;
-    height: 100px;
-    margin-right: 20px;
-}
-
 .temperature {
     font-size: 3rem;
-    color: #333;
+    color: var(--text-color);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        width: 95%;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    input[type="text"],
+    button,
+    .button {
+        width: 100%;
+    }
+
+    .temperature {
+        font-size: 2rem;
+    }
 }

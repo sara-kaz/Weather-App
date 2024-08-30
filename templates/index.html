@@ -4,43 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Use a more specific path for the stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <!-- Include FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <h1>Weather and Forecast</h1>
-        
+
+        <!-- Weather Information Section -->
         {% if weather %}
-            <div class="weather-info">
+            <section class="weather-info">
                 <h2>{{ city }}</h2>
                 <div class="temperature-container">
-                    <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="Weather Icon" class="weather-icon">
+                    <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="Weather Icon" class="weather-icon">
                     <h1 class="temperature">{{ weather.temperature }} °C</h1>
                 </div>
-                <p><i class="fas fa-cloud"></i> Weather: {{ weather.description }}</p>
-                <p><i class="fas fa-temperature-low"></i> Feels Like: {{ weather.feels_like }} °C</p>
-                <p><i class="fas fa-tint"></i> Humidity: {{ weather.humidity }} %</p>
-                <p><i class="fas fa-wind"></i> Wind Speed: {{ weather.wind_speed }} m/s</p>
-            </div>
+                <ul class="weather-details">
+                    <li><i class="fas fa-cloud"></i> Weather: {{ weather.description }}</li>
+                    <li><i class="fas fa-temperature-low"></i> Feels Like: {{ weather.feels_like }} °C</li>
+                    <li><i class="fas fa-tint"></i> Humidity: {{ weather.humidity }}%</li>
+                    <li><i class="fas fa-wind"></i> Wind Speed: {{ weather.wind_speed }} m/s</li>
+                </ul>
+            </section>
+        <!-- Forecast Information Section -->
         {% elif forecast %}
-            <div class="forecast-info">
+            <section class="forecast-info">
                 <h2>5-Day Forecast for {{ city }}</h2>
                 {% for day in forecast %}
-                    <div class="forecast-day">
+                    <article class="forecast-day">
                         <div class="temperature-container">
-                            <img src="http://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="Weather Icon" class="weather-icon">
-                            <h1 class="temperature">{{ day.temperature }} °C</h1>
+                            <img src="https://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="Weather Icon" class="weather-icon">
+                            <h3 class="temperature">{{ day.temperature }} °C</h3>
                         </div>
                         <p><i class="fas fa-calendar-alt"></i> Date: {{ day.date }}</p>
                         <p><i class="fas fa-cloud"></i> Weather: {{ day.description }}</p>
-                    </div>
+                    </article>
                     <hr>
                 {% endfor %}
-            </div>
+            </section>
+        <!-- Information Card Section -->
         {% elif info %}
-            <div class="info-card">
+            <section class="info-card">
                 <h2>PM Accelerator</h2>
                 <p>The PM Accelerator is an advanced project management tool designed to streamline workflows and enhance productivity.</p>
                 <p>Features include:</p>
@@ -51,36 +57,41 @@
                     <li>Advanced Analytics and Reporting</li>
                 </ul>
                 <p>For more information, visit our <a href="https://www.drnancyli.com/">Website</a>.</p>
-            </div>
+            </section>
+        <!-- Error Message Section -->
         {% elif error %}
-            <div class="error">
+            <section class="error">
                 <p>Error: {{ error }}</p>
-            </div>
+            </section>
         {% endif %}
 
-        <!-- Forms for user input -->
-        <form method="POST" action="/weather">
-            <input type="text" name="city" placeholder="Enter city name" required>
-            <button type="submit"><i class="fas fa-search-location"></i> Get Weather by City</button>
-        </form>
+        <!-- User Input Forms -->
+        <section class="user-forms">
+            <form method="POST" action="/weather" class="weather-form">
+                <input type="text" name="city" placeholder="Enter city name" required>
+                <button type="submit"><i class="fas fa-search-location"></i> Get Weather by City</button>
+            </form>
 
-        <form method="POST" action="/forecast">
-            <input type="text" name="city" placeholder="Enter city name" required>
-            <button type="submit"><i class="fas fa-cloud-sun"></i> Get 5-Day Forecast</button>
-        </form>
+            <form method="POST" action="/forecast" class="forecast-form">
+                <input type="text" name="city" placeholder="Enter city name" required>
+                <button type="submit"><i class="fas fa-cloud-sun"></i> Get 5-Day Forecast</button>
+            </form>
 
-        <form method="POST" action="/weather-by-location-form">
-            <input type="text" id="lat" name="lat" placeholder="Enter latitude" required>
-            <input type="text" id="lon" name="lon" placeholder="Enter longitude" required>
-            <button type="submit"><i class="fas fa-map-marker-alt"></i> Get Weather by Location</button>
-            <a href="https://www.latlong.net/convert-address-to-lat-long.html" class="button" target="_blank">Convert Address to Lat/Long</a>
-        </form>
+            <form method="POST" action="/weather-by-location-form" class="location-form">
+                <input type="text" id="lat" name="lat" placeholder="Enter latitude" required>
+                <input type="text" id="lon" name="lon" placeholder="Enter longitude" required>
+                <button type="submit"><i class="fas fa-map-marker-alt"></i> Get Weather by Location</button>
+                <a href="https://www.latlong.net/convert-address-to-lat-long.html" class="button" target="_blank">Convert Address to Lat/Long</a>
+            </form>
 
-        <form method="GET" action="/info">
-            <button type="submit"><i class="fas fa-info-circle"></i> Info</button>
-        </form>
+            <form method="GET" action="/info" class="info-form">
+                <button type="submit"><i class="fas fa-info-circle"></i> Info</button>
+            </form>
+        </section>
 
-        <p>&copy; 2024, Sara Ali</p>
+        <footer>
+            <p>&copy; 2024, Sara Ali</p>
+        </footer>
     </div>
 </body>
 </html>
