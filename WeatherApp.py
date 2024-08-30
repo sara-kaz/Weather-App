@@ -1,88 +1,115 @@
 from flask import Flask, render_template, request
-from datetime import datetime
 import requests
+from typing import Dict, Any, List, Optional
 
 app = Flask(__name__)
 
-api_key = "a324848564b117b70fadd84deae50d18"  # Replace with your OpenWeatherMap API Key
-units = "metric"  # Use "imperial" for Fahrenheit
-base_url = "http://api.openweathermap.org/data/2.5/"
+# Configuration constants
+API_KEY = "a324848564b117b70fadd84deae50d18"  # OpenWeatherMap API Key
+UNITS = "metric"  # Use "imperial" for Fahrenheit
+BASE_URL = "http://api.openweathermap.org/data/2.5/"
 
-def make_request(url):
+def make_api_request(url: str) -> Dict[str, Any]:
+    """
+    Make a GET request to the specified URL and return the JSON response.
+    
+    Args:
+        url (str): The URL to make the request to.
+    
+    Returns:
+        Dict[str, Any]: The JSON response from the API.
+    """
     response = requests.get(url)
+    response.raise_for_status()  # Raise an exception for bad responses
     return response.json()
+
+def get_weather_details(data: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Extract relevant weather details from the API response.
+    
+    Args:
+        data (Dict[str, Any]): The JSON data from the API response.
+    
+    Returns:
+        Dict[str, Any]: A dictionary containing extracted weather details.
+    """
+    return {
+        "description": data["weather"][0]["description"],
+        "temperature": data["main"]["temp"],
+        "feels_like": data["main"]["feels_like"],
+        "humidity": data["main"]["humidity"],
+        "wind_speed": data["wind"]["speed"],
+        "icon": data["weather"][0]["icon"]
+    }
 
 @app.route('/')
 def index():
+    """Render the index page."""
     return render_template('index.html')
 
 @app.route('/weather', methods=['POST'])
 def weather():
+    """Handle the weather request for a city."""
     city_name = request.form.get('city')
-    url = f"{base_url}weather?q={city_name}&units={units}&appid={api_key}"
-    json_data = make_request(url)
+    url = f"{BASE_URL}weather?q={city_name}&units={UNITS}&appid={API_KEY}"
     
-    if json_data.get("cod") != 200:
-        error_message = json_data.get("message", "Failed to fetch weather data")
-        return render_template('index.html', error=error_message)
-    
-    weather_details = {
-        "description": json_data["weather"][0]["description"],
-        "temperature": json_data["main"]["temp"],
-        "feels_like": json_data["main"]["feels_like"],
-        "humidity": json_data["main"]["humidity"],
-        "wind_speed": json_data["wind"]["speed"],
-        "icon": json_data["weather"][0]["icon"]  # Get weather icon code
-    }
-
-    return render_template('index.html', weather=weather_details, city=city_name)
+    try:
+        json_data = make_api_request(url)
+        weather_details = get_weather_details(json_data)
+        return render_template('index.html', weather=weather_details, city=city_name)
+    except requests.RequestException as e:
+        return render_template('index.html', error=f"Failed to fetch weather data: {str(e)}")
 
 @app.route('/forecast', methods=['POST'])
 def forecast():
+    """Handle the 5-day forecast request for a city."""
     city_name = request.form.get('city')
-    url = f"{base_url}forecast?q={city_name}&units={units}&appid={api_key}"
-    json_data = make_request(url)
+    url = f"{BASE_URL}forecast?q={city_name}&units={UNITS}&appid={API_KEY}"
     
-    if json_data.get("cod") != "200":
-        error_message = json_data.get("message", "Failed to fetch forecast data")
-        return render_template('index.html', error=error_message)
+    try:
+        json_data = make_api_request(url)
+        forecast_list = get_forecast_list(json_data)
+        return render_template('index.html', forecast=forecast_list, city=city_name)
+    except requests.RequestException as e:
+        return render_template('index.html', error=f"Failed to fetch forecast data: {str(e)}")
+
+def get_forecast_list(data: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """
+    Extract the 5-day forecast from the API response.
     
-    forecast_list = []
-    for i in range(0, len(json_data["list"]), 8):  # 8 intervals per day
-        forecast_details = {
-            "date": json_data["list"][i]["dt_txt"],
-            "temperature": json_data["list"][i]["main"]["temp"],
-            "description": json_data["list"][i]["weather"][0]["description"],
-            "icon": json_data["list"][i]["weather"][0]["icon"]  # Get weather icon code
+    Args:
+        data (Dict[str, Any]): The JSON data from the API response.
+    
+    Returns:
+        List[Dict[str, Any]]: A list of dictionaries containing forecast details for each day.
+    """
+    return [
+        {
+            "date": item["dt_txt"],
+            "temperature": item["main"]["temp"],
+            "description": item["weather"][0]["description"],
+            "icon": item["weather"][0]["icon"]
         }
-        forecast_list.append(forecast_details)
-    
-    return render_template('index.html', forecast=forecast_list, city=city_name)
+        for item in data["list"][::8]  # 8 intervals per day
+    ]
 
 @app.route('/weather-by-location-form', methods=['POST'])
 def weather_by_location_form():
+    """Handle the weather request for a specific latitude and longitude."""
     lat = request.form.get('lat')
     lon = request.form.get('lon')
-    url = f"{base_url}weather?lat={lat}&lon={lon}&units={units}&appid={api_key}"
-    json_data = make_request(url)
+    url = f"{BASE_URL}weather?lat={lat}&lon={lon}&units={UNITS}&appid={API_KEY}"
     
-    if json_data.get("cod") != 200:
-        error_message = json_data.get("message", "Failed to fetch weather data")
-        return render_template('index.html', error=error_message)
-    
-    weather_details = {
-        "description": json_data["weather"][0]["description"],
-        "temperature": json_data["main"]["temp"],
-        "feels_like": json_data["main"]["feels_like"],
-        "humidity": json_data["main"]["humidity"],
-        "wind_speed": json_data["wind"]["speed"],
-        "icon": json_data["weather"][0]["icon"]  # Get weather icon code
-    }
-
-    return render_template('index.html', weather=weather_details, city=f"({lat}, {lon})")
+    try:
+        json_data = make_api_request(url)
+        weather_details = get_weather_details(json_data)
+        return render_template('index.html', weather=weather_details, city=f"({lat}, {lon})")
+    except requests.RequestException as e:
+        return render_template('index.html', error=f"Failed to fetch weather data: {str(e)}")
 
 @app.route('/info')
 def info():
+    """Render the info page."""
     return render_template('index.html', info=True)
 
 if __name__ == '__main__':
